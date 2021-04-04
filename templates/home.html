@@ -2,12 +2,78 @@
 <html>
     <head>
         <title>Headlines</title>
+        <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+        <style>
+            input[type="text"], select {
+                color: grey;
+                border: 1px solid lightsteelblue;
+                height: 30px;
+                line-height:15px;
+                margin: 2px 6px 16px 0px;
+            }
+            button{
+                padding: 5px 10px 5px 10px;
+                color: black;
+                background: lightsteelblue;
+                border: none;
+                box-shadow: 1px 1px 1px #4C6E91;
+            }
+            button:hover{
+                background: steelblue;
+        }
+        html {
+            font-family: "Helvetica";
+            background: white;
+        }
+        body {
+            background: lightgrey;
+        }
+        #header {
+            padding-top: 5;
+            background: lightsteelblue;
+        }
+        </style>
     </head>
     <body>
-        <h1>Headlines</h1>
+        <div id='header'>
+            <h1>Headlines</h1>
+            <p>Headlines. Currency. Weather</p>
+            <hr />
+        </div>
+        <h2>Current weather</h2>
+        <form method='GET'>
+        <input type='text' name='city' placeholder="weather search">
+        <button type='submit'>Submit</button>
+        </form>
+        <p>City: <b>{{weather.city}}, {{weather.country}}</b></p>
+        <p>{{weather.description}} | {{weather.temperature}} K</p>
+        <h2>Currency</h2>
+        1 {{currency_from}} = {{rate}} {{currency_to}}
+        <form>
+            from: <select name='currency_from'>
+                {% for currency in currencies %}
+                <option value='{{currency}}' {{'selected="selected"' if currency_from==currency}}>{{currency}}</option>
+                {% endfor %}
+            </select>
+            to: <select name='currency_to'>
+                {% for currency in currencies %}
+                <option value='{{currency}}' {{'selected="selected"' if currency_to==currency}}>
+                    {{currency}}
+                </option>
+                {% endfor %}
+            </select>
+            <button type='submit'>Submit</button>
+        </form>
+
+        <h2>Headlines</h2>
         <form method="GET">
-            <input type='text' name='publication' placeholder="search">
-            <input type='submit' value='Submit'>
+            <select name='publication'>
+                <option value='bbc'>BBC</option>
+                <option value='cnn'>CNN</option>
+                <option value='fox'>FOX</option>
+                <option value='iol'>IOL</option>
+            </select>
+            <button type='submit'>Submit</button>
         </form>
         {% for article in articles %}
         <b><a href="{{article.link}}">{{article.title}}</a></b><br>
