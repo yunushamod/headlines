@@ -35,7 +35,7 @@ def home():
     currency_from = get_value_with_fallback('currency_from')
     currency_to = get_value_with_fallback('currency_to')
     rate, currencies = get_rate(currency_from, currency_to)
-    response = make_response(render_template('home.html', articles=articles, weather=weather,
+    response = make_response(render_template('home.html', articles=articles,publication=publication, weather=weather,
     currency_from=currency_from, currency_to=currency_to, 
     rate=rate, currencies=sorted(currencies)))
     expires = datetime.datetime.now() + datetime.timedelta(days=365) # Meaning it's going to expire in 365 days(1 year)
