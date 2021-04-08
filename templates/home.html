@@ -68,10 +68,10 @@
         <h2>Headlines</h2>
         <form method="GET">
             <select name='publication'>
-                <option value='bbc'>BBC</option>
-                <option value='cnn'>CNN</option>
-                <option value='fox'>FOX</option>
-                <option value='iol'>IOL</option>
+                <option value='bbc' {{'selected="selected"' if publication='bbc'}}>BBC</option>
+                <option value='cnn' {{'selected="selected"' if publication='cnn'}}>CNN</option>
+                <option value='fox' {{'selected="selected"' if publication='fox'}}>FOX</option>
+                <option value='iol' {{'selected="selected"' if publication='iol'}}>IOL</option>
             </select>
             <button type='submit'>Submit</button>
         </form>

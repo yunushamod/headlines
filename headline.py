@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, make_response
 
 DEFAULTS = {
     'publication':'bbc',
-    'city':'London,UK',
+    'city':'London, UK',
     'currency_from':"GBP",
     'currency_to':'USD',
 }
@@ -26,7 +26,7 @@ def get_value_with_fallback(key):
 
 @app.route('/')
 def home():
-    # get customized headliines, based on user input or default
+    # get customized headlines, based on user input or default
     publication = get_value_with_fallback('publication')
     articles = get_news(publication)
     city = get_value_with_fallback('city')
@@ -38,8 +38,8 @@ def home():
     response = make_response(render_template('home.html', articles=articles, weather=weather,
     currency_from=currency_from, currency_to=currency_to, 
     rate=rate, currencies=sorted(currencies)))
-    expires = datetime.datetime.now() + datetime.timedelta(days=365)
-    response.set_cookie('publication', publication, expires=expires)
+    expires = datetime.datetime.now() + datetime.timedelta(days=365) # Meaning it's going to expire in 365 days(1 year)
+    response.set_cookie('publication', publication, expires=expires) # set_cookie(name of cookie, value, expiry_date)
     response.set_cookie('city', city, expires=expires)
     response.set_cookie('currency_from', currency_from, expires=expires)
     response.set_cookie('currency_to', currency_to, expires=expires)
@@ -51,11 +51,12 @@ def get_news(query):
     else:
         publication = query.lower()
     feed = feedparser.parse(RSS_FEEDS[publication])
-    weather = get_weather('London,UK')
+    #weather = get_weather('London, UK')
     feed_articles = feed['entries']
     return feed_articles
 
 def get_weather(query):
+    query = urllib.parse.quote(query)
     url = WEATHER_URL.format(query)
     data = urllib.request.urlopen(url).read()
     parsed = json.loads(data)
