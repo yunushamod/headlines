@@ -7,8 +7,8 @@ DEFAULTS = {
     'currency_from':"GBP",
     'currency_to':'USD',
 }
-WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metrics&appid=bc35a7117d80446378cf53ba12f69b11'
-CURRENCY_URL = 'https://openexchangerates.org/api/latest.json?app_id=40abb51cd45e4f2eb4c005eee5800bf5'
+WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metrics&appid=>API_KEY>'
+CURRENCY_URL = 'https://openexchangerates.org/api/latest.json?app_id=<API_KEY>'
 app = Flask(__name__)
 RSS_FEEDS = {
     'bbc':'https://feeds.bbci.co.uk/news/rss.xml',
